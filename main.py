@@ -61,16 +61,16 @@ while running:
 	right_paddleY_change = 0
 
 	if keys[pygame.K_w]:
-		left_paddleY_change -= 1.3
+		left_paddleY_change -= 1.5
 
 	if keys[pygame.K_s]:
-		left_paddleY_change += 1.3
+		left_paddleY_change += 1.5
 
 	if keys[pygame.K_UP]:
-		right_paddleY_change -= 1.3
+		right_paddleY_change -= 1.5
 
 	if keys[pygame.K_DOWN]:
-		right_paddleY_change += 1.3
+		right_paddleY_change += 1.5
 
 
 	left_paddleY += left_paddleY_change
