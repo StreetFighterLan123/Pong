@@ -2,9 +2,22 @@ import pygame
 import random
 import math
 import time
+import os
+
+
+#Position the Game Window
+windowX = 260
+windowY = 100
+os.environ['SDL_VIDEO_WINDOW_POS'] = "%d, %d" % (windowX, windowY)
+
 
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
+
+#Booting wait, without it the OS script will be a goofy poofy.
+time.sleep(2)
+
+
 pygame.display.set_caption("Pong")
 icon = pygame.image.load('ping-pong.png')
 pygame.display.set_icon(icon)
