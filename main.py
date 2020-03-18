@@ -78,10 +78,6 @@ def ball(x,y):
 
 
 
-
-
-
-
 running = True
 
 while running:
@@ -106,10 +102,7 @@ while running:
 
 	if keys[pygame.K_DOWN]:
 		right_paddleY_change += 1.5
-
-
-	left_paddleY += left_paddleY_change
-	right_paddleY += right_paddleY_change
+		
 	#Boundaries
 	if left_paddleY <= 0:
 		left_paddleY = 0
@@ -120,6 +113,10 @@ while running:
 	elif right_paddleY > 536:
 		right_paddleY = 536
 
+	left_paddleY += left_paddleY_change
+	right_paddleY += right_paddleY_change
+	
+	
 
 	disp_pong_text()
 	left_paddle(left_paddleX, left_paddleY)
