@@ -60,6 +60,28 @@ def disp_pong_text():
 
 
 
+
+#ballImg made by Freepik
+bigballImg = pygame.image.load('ball.png')
+ballImg = pygame.transform.scale(bigballImg, (20,20))
+ballX = 400
+ballY = 300
+ballX_change = 0
+ballyX_change = 0
+#ballX_vel = 0
+#ballY_vel = 0
+
+def ball(x,y):
+	screen.blit(ballImg, (x,y))
+	
+
+
+
+
+
+
+
+
 running = True
 
 while running:
@@ -102,5 +124,6 @@ while running:
 	disp_pong_text()
 	left_paddle(left_paddleX, left_paddleY)
 	right_paddle(right_paddleX, right_paddleY)
+	ball(ballX, ballY)
 	time.sleep(0.001)
 	pygame.display.update()
