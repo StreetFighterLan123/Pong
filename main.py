@@ -90,19 +90,13 @@ def ball_movement():
 		ballX_change = 0
 	#Make it work later.
 
-def left_paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
+def paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
 	distance = math.sqrt((math.pow(left_paddleX - ballX,2)) + (math.pow(left_paddleY - ballY,2)))
 	if distance < 20:
 		return True
 	else:
 		return False
 
-def right_paddle_collision(right_paddleX, right_paddleY, ballX, ballY):
-	distance2 = math.sqrt((math.pow(right_paddleX - ballX,2)) + (math.pow(right_paddleY - ballY,2)))
-	if distance2 < 20:
-		return True
-	else:
-		return False
 
 
 
@@ -163,9 +157,9 @@ while running:
 	
 	ball_movement()
 	ball(ballX, ballY)
-	if left_paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
+	if paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
 		ball_direction = "Right"
-	if right_paddle_collision(right_paddleX, right_paddleY, ballX, ballY):
+	if paddle_collision(right_paddleX, right_paddleY, ballX, ballY):
 		ball_direction = "Left"
 	time.sleep(0.001)
 	pygame.display.update()
