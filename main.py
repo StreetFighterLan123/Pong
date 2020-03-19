@@ -6,6 +6,9 @@ import os
 import math
 
 
+clock = pygame.time.Clock()
+
+
 #Position the Game Window
 windowX = 260
 windowY = 100
@@ -81,10 +84,10 @@ def ball_movement():
 	global ballX
 	global ballX_change
 	if ball_direction == "Left":
-		ballX_change = 0.8
+		ballX_change = 4
 		ballX += -ballX_change
 	if ball_direction == "Right":
-		ballX_change = 0.8
+		ballX_change = 4
 		ballX += ballX_change
 	if ball_direction == "Still":
 		ballX_change = 0
@@ -92,10 +95,17 @@ def ball_movement():
 
 def paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
 	distance = math.sqrt((math.pow(left_paddleX - ballX,2)) + (math.pow(left_paddleY - ballY,2)))
-	if distance < 20:
+	if distance < 75:
 		return True
 	else:
 		return False
+def right_paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
+	distance = math.sqrt((math.pow(left_paddleX - ballX,2)) + (math.pow(left_paddleY - ballY,2)))
+	if distance < 50:
+		return True
+	else:
+		return False
+
 
 
 
@@ -116,16 +126,16 @@ while running:
 	ballyX_change = 0
 
 	if keys[pygame.K_w]:
-		left_paddleY_change -= 1.5
+		left_paddleY_change -= 5.5
 
 	if keys[pygame.K_s]:
-		left_paddleY_change += 1.5
+		left_paddleY_change += 5.5
 
 	if keys[pygame.K_UP]:
-		right_paddleY_change -= 1.5
+		right_paddleY_change -= 5.5
 
 	if keys[pygame.K_DOWN]:
-		right_paddleY_change += 1.5
+		right_paddleY_change += 5.5
 		
 	#Boundaries
 	if left_paddleY <= 0:
@@ -139,16 +149,13 @@ while running:
 
 	left_paddleY += left_paddleY_change
 	right_paddleY += right_paddleY_change
-	
+	left_paddleX += left_paddleX_change
+	right_paddleX += right_paddleX_change
+
 	#MAKE THE BALL X CHANGE BUT FIX IT LATER
 	
 	
 
-
-
-
-
-	
 
 	disp_pong_text()
 	left_paddle(left_paddleX, left_paddleY)
@@ -159,7 +166,15 @@ while running:
 	ball(ballX, ballY)
 	if paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
 		ball_direction = "Right"
-	if paddle_collision(right_paddleX, right_paddleY, ballX, ballY):
+		print "Right"
+	if right_paddle_collision(right_paddleX, right_paddleY, ballX, ballY):
 		ball_direction = "Left"
-	time.sleep(0.001)
+		print "Left"
+	print ("Left Paddle X %s. Left Paddle Y %s") % (left_paddleX, left_paddleY)
+	print ("Right Paddle X %s, Right Paddle Y %s") % (right_paddleX, right_paddleY)
+	print("Ball X %s, Ball Y %s") % (ballX, ballY)
+	print("BallXchange %s") % (ballX_change)
+
+	#time.sleep(0.001)
+	clock.tick(60)
 	pygame.display.update()
