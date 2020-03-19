@@ -3,6 +3,7 @@ import random
 import math
 import time
 import os
+import math
 
 
 #Position the Game Window
@@ -21,7 +22,7 @@ time.sleep(2)
 pygame.display.set_caption("Pong")
 icon = pygame.image.load('ping-pong.png')
 pygame.display.set_icon(icon)
-#Game icon art made by FreePic
+#Game icon art made by FreePik
 
 
 
@@ -75,7 +76,33 @@ ball_direction = "Left"
 def ball(x,y):
 	screen.blit(ballImg, (x,y))
 	
+def ball_movement():
+	global ball_direction
+	global ballX
+	global ballX_change
+	if ball_direction == "Left":
+		ballX_change = 0.8
+		ballX += -ballX_change
+	if ball_direction == "Right":
+		ballX_change = 0.8
+		ballX += ballX_change
+	if ball_direction == "Still":
+		ballX_change = 0
+	#Make it work later.
 
+def left_paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
+	distance = math.sqrt((math.pow(left_paddleX - ballX,2)) + (math.pow(left_paddleY - ballY,2)))
+	if distance < 20:
+		return True
+	else:
+		return False
+
+def right_paddle_collision(right_paddleX, right_paddleY, ballX, ballY):
+	distance = math.sqrt((math.pow(right_paddleX - ballX,2)) + (math.pow(right_paddleY - ballY,2)))
+	if distance < 20:
+		return True
+	else:
+		return False
 
 
 
@@ -91,6 +118,8 @@ while running:
 
 	left_paddleY_change = 0
 	right_paddleY_change = 0
+	ballX_change = 0
+	ballyX_change = 0
 
 	if keys[pygame.K_w]:
 		left_paddleY_change -= 1.5
@@ -117,11 +146,26 @@ while running:
 	left_paddleY += left_paddleY_change
 	right_paddleY += right_paddleY_change
 	
+	#MAKE THE BALL X CHANGE BUT FIX IT LATER
+	
+	
+
+
+
+
+
 	
 
 	disp_pong_text()
 	left_paddle(left_paddleX, left_paddleY)
 	right_paddle(right_paddleX, right_paddleY)
+	
+	
+	ball_movement()
 	ball(ballX, ballY)
+	if left_paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
+		ball_direction = "Right"
+	if right_paddle_collision(right_paddleX, right_paddleY, ballX, ballY):
+		ball_direction = "Left"
 	time.sleep(0.001)
 	pygame.display.update()
