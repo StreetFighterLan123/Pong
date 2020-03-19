@@ -70,6 +70,7 @@ ballX_change = 0
 ballyX_change = 0
 #ballX_vel = 0
 #ballY_vel = 0
+ball_direction = Left
 
 def ball(x,y):
 	screen.blit(ballImg, (x,y))
