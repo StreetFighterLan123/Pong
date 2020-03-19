@@ -98,8 +98,8 @@ def left_paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
 		return False
 
 def right_paddle_collision(right_paddleX, right_paddleY, ballX, ballY):
-	distance = math.sqrt((math.pow(right_paddleX - ballX,2)) + (math.pow(right_paddleY - ballY,2)))
-	if distance < 20:
+	distance2 = math.sqrt((math.pow(right_paddleX - ballX,2)) + (math.pow(right_paddleY - ballY,2)))
+	if distance2 < 20:
 		return True
 	else:
 		return False
