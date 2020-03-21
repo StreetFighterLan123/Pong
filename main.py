@@ -59,7 +59,7 @@ def right_paddle(x,y):
 pong_font = pygame.font.Font('freesansbold.ttf', 64)
 def disp_pong_text():
 	pong_text = pong_font.render("PONG", True, (255,255,255))
-	screen.blit(pong_text, (303, 50))
+	screen.blit(pong_text, (302, 50))
 
 
 
