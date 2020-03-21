@@ -26,8 +26,8 @@ pygame.display.set_caption("Pong")
 icon = pygame.image.load('ping-pong.png')
 pygame.display.set_icon(icon)
 #Game icon art made by FreePik
-
-
+pygame.mixer.music.load("pong_song.wav")
+pygame.mixer.music.play(-1)
 
 # Left Paddle
 left_paddleImg = pygame.image.load('rectangle.png')
