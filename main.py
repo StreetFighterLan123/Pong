@@ -28,6 +28,14 @@ pygame.display.set_icon(icon)
 #Game icon art made by FreePik
 pygame.mixer.music.load("pong_song.wav")
 pygame.mixer.music.play(-1)
+#Pong hit sound effect
+hit_sound = pygame.mixer.Sound("hit.wav")
+
+
+
+
+
+
 
 # Left Paddle
 left_paddleImg = pygame.image.load('rectangle.png')
@@ -192,9 +200,11 @@ while running:
 	if paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
 		ball_direction = "Right"
 		print "Right"
+		pygame.mixer.Sound.play(hit_sound)
 	if right_paddle_collision(right_paddleX, right_paddleY, ballX, ballY):
 		ball_direction = "Left"
 		print "Left"
+		pygame.mixer.Sound.play(hit_sound)
 	print ("Left Paddle X %s. Left Paddle Y %s") % (left_paddleX, left_paddleY)
 	print ("Right Paddle X %s, Right Paddle Y %s") % (right_paddleX, right_paddleY)
 	print("Ball X %s, Ball Y %s") % (ballX, ballY)
