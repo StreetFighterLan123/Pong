@@ -108,6 +108,31 @@ def right_paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
 
 
 
+#Code for if the paddle is up (above a certain number) or down,
+# -- below a certain number
+
+up = False
+down = False
+
+def left_paddle_up_or_down():
+	global left_paddleY
+	global up
+	global down
+
+def right_paddle_up_or_down():
+	global right_paddleY
+	global up
+	global down
+
+
+
+def ball_go_up():
+	print "IN PROGRESS"
+
+def ball_go_down():
+	print "In PROGRESS"
+
+
 
 
 running = True
