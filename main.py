@@ -1,3 +1,4 @@
+#Basic Game Imports
 import pygame
 import random
 import math
@@ -41,7 +42,7 @@ hit_sound = pygame.mixer.Sound("hit.wav")
 left_paddleImg = pygame.image.load('rectangle.png')
 # paddleImg art made by Alfredo Hernandez
 left_paddleX = 10
-left_paddleY = 450
+left_paddleY = 280
 left_paddleX_change = 0 
 left_paddleY_change = 0 
 
@@ -54,7 +55,7 @@ def left_paddle(x, y):
 right_paddleImg = pygame.image.load('rectangle.png')
 # again, paddleImg art made by Alfredo Hernandez
 right_paddleX = 730
-right_paddleY = 450
+right_paddleY = 280
 right_paddleX_change = 0 
 right_paddleY_change = 0 
 
@@ -113,6 +114,19 @@ def right_paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
 		return True
 	else:
 		return False
+
+
+
+
+def ball_reset():
+	global ball_direction
+	global ballX
+	global ballY
+	ball_direction = "Still"
+	ballX = 400
+	ballY = 300
+	pygame.display.update()
+	time.sleep(1)
 
 
 
@@ -209,6 +223,29 @@ while running:
 	print ("Right Paddle X %s, Right Paddle Y %s") % (right_paddleX, right_paddleY)
 	print("Ball X %s, Ball Y %s") % (ballX, ballY)
 	print("BallXchange %s") % (ballX_change)
+
+
+	if ballX > 780:
+		ball_reset()
+		left_paddle(left_paddleX, left_paddleY)
+		right_paddle(right_paddleX, right_paddleY)
+		left_paddleY = 280
+		right_paddleY = 280
+		pygame.display.update()
+		time.sleep(0.5)
+		ball_direction = "Right"
+	if ballX < 0:
+		ball_reset()
+		left_paddle(left_paddleX, left_paddleY)
+		right_paddle(right_paddleX, right_paddleY)
+		left_paddleY = 280
+		right_paddleY = 280
+		pygame.display.update()
+		time.sleep(0.5)
+		ball_direction = "Left"
+
+
+
 
 	#time.sleep(0.001)
 	clock.tick(60)
