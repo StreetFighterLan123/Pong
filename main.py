@@ -157,6 +157,25 @@ def ball_go_down():
 
 
 
+#Score Variables
+left_score = 0
+right_score = 0
+
+left_score_font = pygame.font.Font('freesansbold.ttf', 32)
+right_score_font = pygame.font.Font('freesansbold.ttf', 32)
+
+
+def print_left():
+	global left_score
+	left_score_text = left_score_font.render(str(left_score), True, (255,255,255))
+	screen.blit(left_score_text, (180, 60))
+def print_right():
+	global right_score
+	right_score_text = right_score_font.render(str(right_score), True, (255,255,255))
+	screen.blit(right_score_text, (600, 60))
+
+
+
 running = True
 
 while running:
@@ -232,6 +251,8 @@ while running:
 		right_paddle(right_paddleX, right_paddleY)
 		left_paddleY = 280
 		right_paddleY = 280
+		left_score += 1 
+		print_left()
 		pygame.display.update()
 		time.sleep(0.5)
 		ball_direction = "Right"
@@ -241,13 +262,16 @@ while running:
 		right_paddle(right_paddleX, right_paddleY)
 		left_paddleY = 280
 		right_paddleY = 280
+		right_score += 1
+		print_right()
 		pygame.display.update()
 		time.sleep(0.5)
 		ball_direction = "Left"
 
 
 
-
+	print_left()
+	print_right()
 	#time.sleep(0.001)
 	clock.tick(60)
 	pygame.display.update()
