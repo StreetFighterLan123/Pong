@@ -223,6 +223,7 @@ while running:
 	print ("Right Paddle X %s, Right Paddle Y %s") % (right_paddleX, right_paddleY)
 	print("Ball X %s, Ball Y %s") % (ballX, ballY)
 	print("BallXchange %s") % (ballX_change)
+	print("Ball Direction: %s") % (ball_direction) 
 
 
 	if ballX > 780:
