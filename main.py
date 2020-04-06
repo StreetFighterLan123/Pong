@@ -80,9 +80,7 @@ ballImg = pygame.transform.scale(bigballImg, (20,20))
 ballX = 400
 ballY = 300
 ballX_change = 0
-ballyX_change = 0
-#ballX_vel = 0
-#ballY_vel = 0
+ballY_change = 0
 ball_direction = "Left"
 
 def ball(x,y):
@@ -92,6 +90,8 @@ def ball_movement():
 	global ball_direction
 	global ballX
 	global ballX_change
+	global ballY
+	global ballY_change
 	if ball_direction == "Left":
 		ballX_change = 4
 		ballX += -ballX_change
@@ -100,22 +100,33 @@ def ball_movement():
 		ballX += ballX_change
 	if ball_direction == "Still":
 		ballX_change = 0
-	#Make it work later.
+	ballY += ballY_change
 
-def paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
+
+def check_ball_hits_wall():
+	global ballY_change
+	if ballY >= 780 or ballY <= 20:
+		ballY_change = -ballY_change
+
+
+
+
+
+def left_paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
 	distance = math.sqrt((math.pow(left_paddleX - ballX,2)) + (math.pow(left_paddleY - ballY,2)))
 	if distance < 75:
 		return True
 	else:
 		return False
+
 def right_paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
+	global ballY_change
 	distance = math.sqrt((math.pow(left_paddleX - ballX,2)) + (math.pow(left_paddleY - ballY,2)))
 	if distance < 50:
 		return True
 	else:
 		return False
-
-
+		
 
 
 def ball_reset():
@@ -127,33 +138,6 @@ def ball_reset():
 	ballY = 300
 	pygame.display.update()
 	time.sleep(1)
-
-
-
-#Code for if the paddle is up (above a certain number) or down,
-# -- below a certain number
-
-up = False
-down = False
-
-def left_paddle_up_or_down():
-	global left_paddleY
-	global up
-	global down
-
-def right_paddle_up_or_down():
-	global right_paddleY
-	global up
-	global down
-
-
-
-def ball_go_up():
-	print "IN PROGRESS"
-
-def ball_go_down():
-	print "In PROGRESS"
-
 
 
 
@@ -177,7 +161,7 @@ def print_right():
 
 
 running = True
-
+ballY_change = 3
 while running:
 	screen.fill((0, 0, 0))
 	for event in pygame.event.get():
@@ -189,7 +173,7 @@ while running:
 	left_paddleY_change = 0
 	right_paddleY_change = 0
 	ballX_change = 0
-	ballyX_change = 0
+	#ballY_change = 0
 
 	if keys[pygame.K_w]:
 		left_paddleY_change -= 5.5
@@ -213,6 +197,10 @@ while running:
 	elif right_paddleY > 536:
 		right_paddleY = 536
 
+	check_ball_hits_wall()
+
+
+
 	left_paddleY += left_paddleY_change
 	right_paddleY += right_paddleY_change
 	left_paddleX += left_paddleX_change
@@ -226,25 +214,42 @@ while running:
 	disp_pong_text()
 	left_paddle(left_paddleX, left_paddleY)
 	right_paddle(right_paddleX, right_paddleY)
+
 	
-	
-	ball_movement()
-	ball(ballX, ballY)
-	if paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
+	if left_paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
 		ball_direction = "Right"
+		which = "Left"
 		print "Right"
 		pygame.mixer.Sound.play(hit_sound)
+		ballY_change = -ballY_change
+
+		
 	if right_paddle_collision(right_paddleX, right_paddleY, ballX, ballY):
 		ball_direction = "Left"
+		which = "Right"
 		print "Left"
 		pygame.mixer.Sound.play(hit_sound)
+		ballY_change = -ballY_change
+	
+
+	
+	
+	
+	#Prints the positions to the terminal, I used this for troubleshooting.
 	print ("Left Paddle X %s. Left Paddle Y %s") % (left_paddleX, left_paddleY)
 	print ("Right Paddle X %s, Right Paddle Y %s") % (right_paddleX, right_paddleY)
 	print("Ball X %s, Ball Y %s") % (ballX, ballY)
 	print("BallXchange %s") % (ballX_change)
 	print("Ball Direction: %s") % (ball_direction) 
+	
 
 
+
+	ball_movement()
+	ball(ballX, ballY)
+
+
+	#Scored!
 	if ballX > 780:
 		ball_reset()
 		left_paddle(left_paddleX, left_paddleY)
@@ -268,10 +273,10 @@ while running:
 		time.sleep(0.5)
 		ball_direction = "Left"
 
-
-
+	#Printing the Score
 	print_left()
 	print_right()
-	#time.sleep(0.001)
+
+
 	clock.tick(60)
 	pygame.display.update()
