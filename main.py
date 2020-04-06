@@ -105,7 +105,9 @@ def ball_movement():
 
 def check_ball_hits_wall():
 	global ballY_change
-	if ballY >= 780 or ballY <= 20:
+	if ballY > 580:
+		ballY_change = -ballY_change
+	if ballY < 20:
 		ballY_change = -ballY_change
 
 
@@ -197,7 +199,7 @@ while running:
 	elif right_paddleY > 536:
 		right_paddleY = 536
 
-	check_ball_hits_wall()
+	
 
 
 
@@ -221,6 +223,7 @@ while running:
 		which = "Left"
 		print "Right"
 		pygame.mixer.Sound.play(hit_sound)
+		ballY_change = random.randint(-5,5)
 		ballY_change = -ballY_change
 
 		
@@ -229,6 +232,7 @@ while running:
 		which = "Right"
 		print "Left"
 		pygame.mixer.Sound.play(hit_sound)
+		ballY_change = random.randint(-5,5)
 		ballY_change = -ballY_change
 	
 
@@ -244,7 +248,7 @@ while running:
 	
 
 
-
+	check_ball_hits_wall()
 	ball_movement()
 	ball(ballX, ballY)
 
