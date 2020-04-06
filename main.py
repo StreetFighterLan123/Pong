@@ -223,7 +223,7 @@ while running:
 		which = "Left"
 		print "Right"
 		pygame.mixer.Sound.play(hit_sound)
-		ballY_change = random.randint(-5,5)
+		ballY_change = random.randint(-8,8)
 		ballY_change = -ballY_change
 
 		
@@ -232,7 +232,7 @@ while running:
 		which = "Right"
 		print "Left"
 		pygame.mixer.Sound.play(hit_sound)
-		ballY_change = random.randint(-5,5)
+		ballY_change = random.randint(-8,8)
 		ballY_change = -ballY_change
 	
 
