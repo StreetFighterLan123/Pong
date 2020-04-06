@@ -5,7 +5,7 @@ import math
 import time
 import os
 import math
-
+import sys
 
 clock = pygame.time.Clock()
 
@@ -135,9 +135,11 @@ def ball_reset():
 	global ball_direction
 	global ballX
 	global ballY
+	global ballY_change
 	ball_direction = "Still"
 	ballX = 400
 	ballY = 300
+	ballY_change = 3
 	pygame.display.update()
 	time.sleep(1)
 
@@ -161,6 +163,18 @@ def print_right():
 	screen.blit(right_score_text, (600, 60))
 
 
+win_font = pong_font = pygame.font.Font('freesansbold.ttf', 64)
+def win():
+	global win_font
+	global right_score
+	global left_score
+	if right_score >= 10:
+		win_text = win_font.render("Right Player Wins!", True, (255,255,255))
+		screen.blit(win_text, (120,310))
+	if left_score >= 10:
+		win_text = win_font.render("Left Player Wins!", True, (255,255,255))
+		screen.blit(win_text, (120,310))
+	
 
 running = True
 ballY_change = 3
@@ -223,7 +237,7 @@ while running:
 		which = "Left"
 		print "Right"
 		pygame.mixer.Sound.play(hit_sound)
-		ballY_change = random.randint(-8,8)
+		ballY_change = random.randint(-9,9)
 		ballY_change = -ballY_change
 
 		
@@ -232,7 +246,7 @@ while running:
 		which = "Right"
 		print "Left"
 		pygame.mixer.Sound.play(hit_sound)
-		ballY_change = random.randint(-8,8)
+		ballY_change = random.randint(-9,9)
 		ballY_change = -ballY_change
 	
 
@@ -276,6 +290,19 @@ while running:
 		pygame.display.update()
 		time.sleep(0.5)
 		ball_direction = "Left"
+
+
+	if left_score >= 10 or right_score >= 10:
+		win()
+		ballX = 10000000
+		right_paddleX = 1000000
+		left_paddleX = 100000
+		pygame.display.update()
+		time.sleep(2)
+		running = False
+		sys.exit()
+
+
 
 	#Printing the Score
 	print_left()
