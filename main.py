@@ -105,7 +105,7 @@ def ball_movement():
 
 def check_ball_hits_wall():
 	global ballY_change
-	if ballY > 580:
+	if ballY > 560:
 		ballY_change = -ballY_change
 	if ballY < 20:
 		ballY_change = -ballY_change
@@ -204,14 +204,14 @@ while running:
 		right_paddleY_change += 5.5
 		
 	#Boundaries
-	if left_paddleY <= 0:
-		left_paddleY = 0
-	elif left_paddleY > 536:
-		left_paddleY = 536
-	if right_paddleY <= 0:
-		right_paddleY = 0
-	elif right_paddleY > 536:
-		right_paddleY = 536
+	if left_paddleY <= 10:
+		left_paddleY = 9
+	elif left_paddleY > 530:
+		left_paddleY = 528
+	if right_paddleY <= 10:
+		right_paddleY = 9
+	elif right_paddleY > 530:
+		right_paddleY = 528
 
 	
 
