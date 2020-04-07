@@ -4,7 +4,6 @@ import random
 import math
 import time
 import os
-import math
 import sys
 
 clock = pygame.time.Clock()
