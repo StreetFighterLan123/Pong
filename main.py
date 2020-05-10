@@ -234,7 +234,7 @@ while running:
 	if left_paddle_collision(left_paddleX, left_paddleY, ballX, ballY):
 		ball_direction = "Right"
 		which = "Left"
-		print "Right"
+		print ("Right")
 		pygame.mixer.Sound.play(hit_sound)
 		ballY_change = random.randint(-9,9)
 		ballY_change = -ballY_change
@@ -243,22 +243,11 @@ while running:
 	if right_paddle_collision(right_paddleX, right_paddleY, ballX, ballY):
 		ball_direction = "Left"
 		which = "Right"
-		print "Left"
+		print("Left")
 		pygame.mixer.Sound.play(hit_sound)
 		ballY_change = random.randint(-9,9)
 		ballY_change = -ballY_change
-	
 
-	
-	
-	
-	#Prints the positions to the terminal, I used this for troubleshooting.
-	print ("Left Paddle X %s. Left Paddle Y %s") % (left_paddleX, left_paddleY)
-	print ("Right Paddle X %s, Right Paddle Y %s") % (right_paddleX, right_paddleY)
-	print("Ball X %s, Ball Y %s") % (ballX, ballY)
-	print("BallXchange %s") % (ballX_change)
-	print("Ball Direction: %s") % (ball_direction) 
-	
 
 
 	check_ball_hits_wall()
